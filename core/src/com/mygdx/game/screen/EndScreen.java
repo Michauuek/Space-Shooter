@@ -30,7 +30,7 @@ public class EndScreen implements Screen{
 
         camera = new OrthographicCamera();
         viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
-        background = new ScrollingBackground(WORLD_WIDTH, WORLD_WIDTH);
+        background = new ScrollingBackground(WORLD_WIDTH, WORLD_HEIGHT);
 
     }
 
@@ -62,14 +62,17 @@ public class EndScreen implements Screen{
 
         background.render(game.getBatch(), delta);
 
-        game.getFont().setColor(1,1,0, 1);
-        game.getFont().draw(game.getBatch(), "Game Over ", 0, 0);
-        game.getFont().draw(game.getBatch(), "Tap anywhere to play again!", 0, 100);
+        game.getFont().setColor(1,1,1, 1);
+        game.getFont().getData().setScale(0.4f);
+
+
+        game.getFont().draw(game.getBatch(), "GAME OVER ", WORLD_WIDTH/2-14, WORLD_HEIGHT/2);
+        //game.getFont().draw(game.getBatch(), "Tap anywhere to play again!", 0, 100);
         game.getBatch().end();
 
         if (Gdx.input.isTouched()) {
             game.setScreen(new GameScreen(game));
-            dispose();
+            //dispose();
         }
     }
 
