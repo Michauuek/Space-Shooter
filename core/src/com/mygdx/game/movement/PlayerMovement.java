@@ -38,6 +38,13 @@ public class PlayerMovement implements IMovable {
         CheckBounds();
     }
 
+    public void moveTo(Vector2 vector, float delta){
+
+        vector.x -=playerRectangle.x + playerRectangle.width/2;
+        vector.y -=playerRectangle.y + playerRectangle.height/2;
+        move(vector, delta);
+    }
+
 //    public float getPositionX() {
 //        return positionX;
 //    }

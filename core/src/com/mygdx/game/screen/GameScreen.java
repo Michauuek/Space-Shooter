@@ -18,8 +18,8 @@ public class GameScreen implements Screen {
     final MyGdxGame game;
     private Camera camera;
     private Viewport viewport;
-    private final int WORLD_WIDTH = 72;
-    private final int WORLD_HEIGHT = 128;
+    private final int WORLD_WIDTH = (int)(72*1.5);
+    private final int WORLD_HEIGHT = (int)(128*1.5);
     private ScrollingBackground scrollingBackground;
 
     private InputHandler inputHandler;
@@ -67,6 +67,8 @@ public class GameScreen implements Screen {
     public void render(float delta) {
 
         ScreenUtils.clear(0,0,0,0);
+        camera.update();
+        //game.getBatch().setProjectionMatrix(camera.combined);
         game.getBatch().begin();
 
         inputHandler.ListenForInput(delta);

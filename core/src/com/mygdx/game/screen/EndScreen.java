@@ -24,8 +24,8 @@ public class EndScreen implements Screen{
 
 
     private Viewport viewport;
-    private final int WORLD_WIDTH = 72;
-    private final int WORLD_HEIGHT = 128;
+    private final int WORLD_WIDTH = (int)(72*1.5);
+    private final int WORLD_HEIGHT = (int)(128*1.5);
 
     Label.LabelStyle label1Style;
 
@@ -43,10 +43,10 @@ public class EndScreen implements Screen{
 
         label1Style = new Label.LabelStyle();
         label1Style.font = game.getFont();
-        label1Style.fontColor = Color.RED;
+        label1Style.fontColor = Color.WHITE;
 
         label1 = new Label("Game Over!",label1Style);
-        label1.setFontScale(0.5f);
+        label1.setFontScale(0.8f);
         label1.setSize(WORLD_WIDTH,30);
         label1.setPosition(0,60);
         label1.setAlignment(Align.center);
@@ -74,13 +74,13 @@ public class EndScreen implements Screen{
     public void render(float delta) {
         ScreenUtils.clear(0,0,0,0);
 
-        //camera.update();
+        camera.update();
 
         //game.getBatch().setProjectionMatrix(camera.combined);
 //        viewport.apply();
        //game.getBatch().setProjectionMatrix(viewport.getCamera().combined);
 
-
+        //game.getBatch().setProjectionMatrix(camera.combined);
         game.getBatch().begin();
 
         background.render(game.getBatch(), delta);
@@ -136,7 +136,6 @@ public class EndScreen implements Screen{
 
     @Override
     public void dispose() {
-        //game.getBatch().dispose();
-        game.getFont().dispose();
+
     }
 }

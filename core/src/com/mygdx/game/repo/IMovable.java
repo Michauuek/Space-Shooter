@@ -7,6 +7,7 @@ public interface IMovable {
      void moveRight(float delta);
 
      void move(Vector2 vector, float delta);
+     void moveTo(Vector2 vector, float delta);
 
      public void setPosition(float x, float y);
 }

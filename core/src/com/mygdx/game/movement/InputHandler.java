@@ -47,10 +47,14 @@ public class InputHandler {
 
 
             camera.unproject(touchPos);
-            movement.setPosition(touchPos.x, touchPos.y);
+            //movement.setPosition(touchPos.x, touchPos.y);
+            vector.x = touchPos.x;
+            vector.y = touchPos.y;
+            movement.moveTo(vector, delta);
             //bucket.x = touchPos.x - 64 / 2;
         }
-
-        movement.move(vector, delta);
+        else {
+            movement.move(vector, delta);
+        }
     }
 }
