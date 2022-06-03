@@ -11,8 +11,8 @@ public abstract class Ship extends Entity{
 
     public abstract void shoot();
 
-    public boolean intersects(Rectangle rectangle){
-        return this.rectangle.overlaps(rectangle);
-    }
+//    public boolean intersects(Rectangle rectangle){
+//        return this.rectangle.overlaps(rectangle);
+//    }
 
 }
