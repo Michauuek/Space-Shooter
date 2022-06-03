@@ -21,4 +21,10 @@ public abstract class Entity {
     public Rectangle getRect(){
         return rectangle;
     }
+
+    public boolean collides(Entity obj){
+        return getRect().overlaps(obj.getRect());
+    }
+
+
 }

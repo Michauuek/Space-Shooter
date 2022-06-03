@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.core.MyGdxGame;
 import com.mygdx.game.entity.*;
+import com.mygdx.game.movement.Collisions;
 import com.mygdx.game.movement.InputHandler;
 
 import java.util.Iterator;
@@ -31,6 +32,7 @@ public class GameScreen implements Screen {
 
     //private DelayedRemovalArray<EnemyShip> removalEnemyShip = new DelayedRemovalArray<>(enemyProjectiles);
     ShipSpawner spawner;
+    Collisions col;
 
 
 
@@ -54,6 +56,7 @@ public class GameScreen implements Screen {
 
         enemyShips = new Array<>(false,10);
         spawner = new ShipSpawner(enemyShips,enemyProjectiles,WORLD_WIDTH,WORLD_HEIGHT);
+
 
     }
 
@@ -95,7 +98,7 @@ public class GameScreen implements Screen {
             Projectile projectile = iter.next();
 
             for(EnemyShip ship : enemyShips){
-                if (ship.intersects(projectile.getRect())){
+                if (ship.collides(projectile)){
                     iter.remove();
                     enemyShips.removeValue(ship, true);
                 }
@@ -106,7 +109,7 @@ public class GameScreen implements Screen {
         for (Iterator<Projectile> iter = enemyProjectiles.iterator(); iter.hasNext(); ) {
             Projectile projectile = iter.next();
 
-            if (player.intersects(projectile.getRect())){
+            if (player.collides(projectile)){
                 iter.remove();
                 game.setScreen(new EndScreen(game));
             }
