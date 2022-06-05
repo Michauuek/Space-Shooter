@@ -50,7 +50,7 @@ public class EndScreen implements Screen{
         label1Style.font = game.getFont();
         label1Style.fontColor = Color.WHITE;
 
-        label1 = new Label("Game Over!",label1Style);
+        label1 = new Label("Game Over",label1Style);
         label1.setFontScale(0.20f);
         label1.setSize(WORLD_WIDTH,30);
         label1.setPosition(0,60);
