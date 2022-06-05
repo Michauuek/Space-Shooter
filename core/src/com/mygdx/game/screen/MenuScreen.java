@@ -33,15 +33,20 @@ public class MenuScreen implements Screen {
         this.game = game;
 
         camera = new OrthographicCamera();
-        viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
-        background = new ScrollingBackground(WORLD_WIDTH, WORLD_HEIGHT);
+
+        viewport = new StretchViewport(WORLD_WIDTH,WORLD_HEIGHT,camera);
+
+        background = new ScrollingBackground(WORLD_WIDTH,WORLD_HEIGHT);
+
+
+        System.out.println(Gdx.graphics.getWidth());
 
         labelStyle = new Label.LabelStyle();
         labelStyle.font = game.getFont();
         labelStyle.fontColor = Color.WHITE;
 
         label = new Label("NEW GAME",labelStyle);
-        label.setFontScale(0.25f);
+        label.setFontScale(0.20f);
         label.setSize(WORLD_WIDTH,30);
         label.setPosition(0,60);
         label.setAlignment(Align.center);
@@ -69,7 +74,11 @@ public class MenuScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(1,0.5f,0,0);
 
+        //viewport.apply();
+
         //camera.update();
+        camera.update();
+        game.getBatch().setProjectionMatrix(camera.combined);
 
         game.getBatch().begin();
 
@@ -90,7 +99,8 @@ public class MenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width,height,true);
+        game.getBatch().setProjectionMatrix(camera.combined);
     }
 
     @Override

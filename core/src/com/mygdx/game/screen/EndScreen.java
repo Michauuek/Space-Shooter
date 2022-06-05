@@ -36,9 +36,11 @@ public class EndScreen implements Screen{
     public EndScreen(MyGdxGame game) {
         this.game = game;
 
-        camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
-        viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
-        background = new ScrollingBackground(WORLD_WIDTH, WORLD_HEIGHT);
+        camera = new OrthographicCamera();
+
+        viewport = new StretchViewport(WORLD_WIDTH,WORLD_HEIGHT,camera);
+
+        background = new ScrollingBackground(WORLD_WIDTH,WORLD_HEIGHT);
 
 
         label1Style = new Label.LabelStyle();
@@ -76,7 +78,7 @@ public class EndScreen implements Screen{
 
         camera.update();
 
-        //game.getBatch().setProjectionMatrix(camera.combined);
+        game.getBatch().setProjectionMatrix(camera.combined);
 //        viewport.apply();
        //game.getBatch().setProjectionMatrix(viewport.getCamera().combined);
 
@@ -111,14 +113,16 @@ public class EndScreen implements Screen{
         game.getBatch().end();
 
         if (Gdx.input.isTouched()) {
-            game.setScreen(new GameScreen(game));
+            //game.setScreen(new GameScreen(game));
+            game.setScreen(new MenuScreen(game));
             dispose();
         }
     }
 
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width,height,true);
+        game.getBatch().setProjectionMatrix(camera.combined);
     }
 
     @Override

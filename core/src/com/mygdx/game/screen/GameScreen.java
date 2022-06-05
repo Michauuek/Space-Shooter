@@ -71,6 +71,7 @@ public class GameScreen implements Screen {
 
         ScreenUtils.clear(0,0,0,0);
         camera.update();
+        game.getBatch().setProjectionMatrix(camera.combined);
         //game.getBatch().setProjectionMatrix(camera.combined);
         game.getBatch().begin();
 

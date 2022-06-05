@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.mygdx.game.screen.EndScreen;
+import com.mygdx.game.screen.GameScreen;
 import com.mygdx.game.screen.MenuScreen;
 
 public class MyGdxGame extends Game {
