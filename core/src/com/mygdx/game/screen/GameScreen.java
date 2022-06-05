@@ -19,8 +19,8 @@ public class GameScreen implements Screen {
     final MyGdxGame game;
     private Camera camera;
     private Viewport viewport;
-    private final int WORLD_WIDTH = (int)(72*1.5);
-    private final int WORLD_HEIGHT = (int)(128*1.5);
+    private final int WORLD_WIDTH = (int)(72*1);
+    private final int WORLD_HEIGHT = (int)(128*1);
     private ScrollingBackground scrollingBackground;
 
     private InputHandler inputHandler;

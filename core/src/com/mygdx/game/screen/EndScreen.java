@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -23,8 +24,8 @@ public class EndScreen implements Screen{
 
 
     private Viewport viewport;
-    private final int WORLD_WIDTH = (int)(72*1.5);
-    private final int WORLD_HEIGHT = (int)(128*1.5);
+    private final int WORLD_WIDTH = (int)(72*1);
+    private final int WORLD_HEIGHT = (int)(128*1);
 
     Label.LabelStyle label1Style;
 
@@ -45,7 +46,7 @@ public class EndScreen implements Screen{
         label1Style.fontColor = Color.WHITE;
 
         label1 = new Label("Game Over!",label1Style);
-        label1.setFontScale(0.8f);
+        label1.setFontScale(0.25f);
         label1.setSize(WORLD_WIDTH,30);
         label1.setPosition(0,60);
         label1.setAlignment(Align.center);

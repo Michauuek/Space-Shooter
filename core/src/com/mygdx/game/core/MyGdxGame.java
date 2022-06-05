@@ -1,8 +1,10 @@
 package com.mygdx.game.core;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.mygdx.game.screen.GameScreen;
 
 public class MyGdxGame extends Game {
@@ -15,7 +17,15 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		font = new BitmapFont();
+
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
+		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+		parameter.size = 80;
+		font = generator.generateFont(parameter); // font size 12 pixels
+
+
+
+		//font = new BitmapFont();
 
 		/*gameScreen = new GameScreen();
 		setScreen(gameScreen);*/
