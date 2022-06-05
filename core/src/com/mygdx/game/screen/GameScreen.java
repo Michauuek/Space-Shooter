@@ -26,6 +26,8 @@ public class GameScreen implements Screen {
     private InputHandler inputHandler;
     private Player player;
 
+    private Score score;
+
     private Array<Projectile> playerProjectiles;
     private Array<EnemyShip> enemyShips;
     private Array<Projectile> enemyProjectiles;
@@ -53,6 +55,7 @@ public class GameScreen implements Screen {
 
         player = new Player(WORLD_WIDTH/2,3,WORLD_WIDTH, WORLD_HEIGHT, playerProjectiles);
         inputHandler = new InputHandler(player.getPlayerMovement(), camera);
+        score = new Score();
 
         enemyShips = new Array<>(false,10);
         spawner = new ShipSpawner(enemyShips,enemyProjectiles,WORLD_WIDTH,WORLD_HEIGHT);
@@ -101,6 +104,7 @@ public class GameScreen implements Screen {
             for(EnemyShip ship : enemyShips){
                 if (ship.collides(projectile)){
                     iter.remove();
+                    score.addPoints();
                     enemyShips.removeValue(ship, true);
                 }
             }
@@ -112,7 +116,8 @@ public class GameScreen implements Screen {
 
             if (player.collides(projectile)){
                 iter.remove();
-                game.setScreen(new EndScreen(game));
+                System.out.println(score.getPoints());
+                game.setScreen(new EndScreen(game, score.getPoints()));
             }
         }
     }

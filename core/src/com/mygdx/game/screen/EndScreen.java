@@ -21,6 +21,7 @@ public class EndScreen implements Screen{
 
     final MyGdxGame game;
     private Camera camera;
+    private Long points;
 
 
     private Viewport viewport;
@@ -32,9 +33,11 @@ public class EndScreen implements Screen{
     private ScrollingBackground background;
 
     Label label1;
+    Label label2;
 
-    public EndScreen(MyGdxGame game) {
+    public EndScreen(MyGdxGame game, Long points) {
         this.game = game;
+        this.points = points;
 
         camera = new OrthographicCamera();
 
@@ -52,6 +55,12 @@ public class EndScreen implements Screen{
         label1.setSize(WORLD_WIDTH,30);
         label1.setPosition(0,60);
         label1.setAlignment(Align.center);
+
+        label2 = new Label("" + points,label1Style);
+        label2.setFontScale(0.12f);
+        label2.setSize(WORLD_WIDTH,18);
+        label2.setPosition(0,50);
+        label2.setAlignment(Align.center);
 
 
     }
@@ -91,6 +100,7 @@ public class EndScreen implements Screen{
         game.getFont().getData().setScale(1.f);
 
         label1.draw(game.getBatch(), 1.f);
+        label2.draw(game.getBatch(), 1.f);
 
 
 

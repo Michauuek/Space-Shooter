@@ -28,6 +28,7 @@ public class MenuScreen implements Screen {
 
     Label.LabelStyle labelStyle;
     Label label;
+    Label smallLabel;
 
     public MenuScreen(MyGdxGame game) {
         this.game = game;
@@ -39,8 +40,6 @@ public class MenuScreen implements Screen {
         background = new ScrollingBackground(WORLD_WIDTH,WORLD_HEIGHT);
 
 
-        System.out.println(Gdx.graphics.getWidth());
-
         labelStyle = new Label.LabelStyle();
         labelStyle.font = game.getFont();
         labelStyle.fontColor = Color.WHITE;
@@ -50,6 +49,12 @@ public class MenuScreen implements Screen {
         label.setSize(WORLD_WIDTH,30);
         label.setPosition(0,60);
         label.setAlignment(Align.center);
+
+        smallLabel = new Label("TAP TO START",labelStyle);
+        smallLabel.setFontScale(0.10f);
+        smallLabel.setSize(WORLD_WIDTH,18);
+        smallLabel.setPosition(0,50);
+        smallLabel.setAlignment(Align.center);
 
 
     }
@@ -88,6 +93,7 @@ public class MenuScreen implements Screen {
         game.getFont().getData().setScale(1.f);
 
         label.draw(game.getBatch(), 1.f);
+        smallLabel.draw(game.getBatch(), 1.f);
 
         game.getBatch().end();
 
