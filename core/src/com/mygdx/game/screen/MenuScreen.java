@@ -7,7 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -16,40 +15,36 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.core.MyGdxGame;
 import com.mygdx.game.entity.ScrollingBackground;
 
-
-public class EndScreen implements Screen{
+public class MenuScreen implements Screen {
 
     final MyGdxGame game;
     private Camera camera;
+    private ScrollingBackground background;
 
 
     private Viewport viewport;
     private final int WORLD_WIDTH = (int)(72*1);
     private final int WORLD_HEIGHT = (int)(128*1);
 
-    Label.LabelStyle label1Style;
+    Label.LabelStyle labelStyle;
+    Label label;
 
-    private ScrollingBackground background;
-
-    Label label1;
-
-    public EndScreen(MyGdxGame game) {
+    public MenuScreen(MyGdxGame game) {
         this.game = game;
 
-        camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
+        camera = new OrthographicCamera();
         viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         background = new ScrollingBackground(WORLD_WIDTH, WORLD_HEIGHT);
 
+        labelStyle = new Label.LabelStyle();
+        labelStyle.font = game.getFont();
+        labelStyle.fontColor = Color.WHITE;
 
-        label1Style = new Label.LabelStyle();
-        label1Style.font = game.getFont();
-        label1Style.fontColor = Color.WHITE;
-
-        label1 = new Label("Game Over!",label1Style);
-        label1.setFontScale(0.20f);
-        label1.setSize(WORLD_WIDTH,30);
-        label1.setPosition(0,60);
-        label1.setAlignment(Align.center);
+        label = new Label("NEW GAME",labelStyle);
+        label.setFontScale(0.25f);
+        label.setSize(WORLD_WIDTH,30);
+        label.setPosition(0,60);
+        label.setAlignment(Align.center);
 
 
     }
@@ -72,15 +67,10 @@ public class EndScreen implements Screen{
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0,0,0,0);
+        ScreenUtils.clear(1,0.5f,0,0);
 
-        camera.update();
+        //camera.update();
 
-        //game.getBatch().setProjectionMatrix(camera.combined);
-//        viewport.apply();
-       //game.getBatch().setProjectionMatrix(viewport.getCamera().combined);
-
-        //game.getBatch().setProjectionMatrix(camera.combined);
         game.getBatch().begin();
 
         background.render(game.getBatch(), delta);
@@ -88,26 +78,8 @@ public class EndScreen implements Screen{
         game.getFont().setColor(1,1,1, 1);
         game.getFont().getData().setScale(1.f);
 
-        label1.draw(game.getBatch(), 1.f);
+        label.draw(game.getBatch(), 1.f);
 
-
-
-//        game.getFont().draw(game.getBatch(),
-//                "GAME OVER ",
-//                WORLD_WIDTH/4,
-//                WORLD_HEIGHT/2,
-//                WORLD_WIDTH,
-//                1,
-//                false);
-//        game.getFont().getData().setScale(0.3f);
-//        game.getFont().draw(game.getBatch(),
-//                "Tap anywhere to play again!",
-//                5,
-//                WORLD_HEIGHT/4,
-//                WORLD_WIDTH,
-//                1,
-//                false);
-        //game.getFont().draw(game.getBatch(), "Tap anywhere to play again!", 0, 100);
         game.getBatch().end();
 
         if (Gdx.input.isTouched()) {
