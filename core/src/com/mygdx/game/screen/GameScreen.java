@@ -1,8 +1,10 @@
 package com.mygdx.game.screen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -29,6 +31,7 @@ public class GameScreen implements Screen {
     private Score score;
     private Lives lives;
 
+    private Array<Explosion> explosions;
     private Array<Projectile> playerProjectiles;
     private Array<EnemyShip> enemyShips;
     private Array<Projectile> enemyProjectiles;
@@ -36,7 +39,6 @@ public class GameScreen implements Screen {
     //private DelayedRemovalArray<EnemyShip> removalEnemyShip = new DelayedRemovalArray<>(enemyProjectiles);
     ShipSpawner spawner;
     Collisions col;
-
 
 
     public GameScreen(MyGdxGame game){
@@ -61,6 +63,7 @@ public class GameScreen implements Screen {
 
         enemyShips = new Array<>(false,10);
         spawner = new ShipSpawner(enemyShips,enemyProjectiles,WORLD_WIDTH,WORLD_HEIGHT);
+        explosions = new Array<>(false, 10);
 
 
     }
@@ -94,7 +97,9 @@ public class GameScreen implements Screen {
 
         //detect collisions
         detectCollisions();
+
         lives.render(game.getBatch(), delta, 1,WORLD_HEIGHT-9);
+
         if(lives.isOver()){
             game.setScreen(new EndScreen(game, score.getPoints()));
         }
@@ -111,6 +116,13 @@ public class GameScreen implements Screen {
 
             for(EnemyShip ship : enemyShips){
                 if (ship.collides(projectile)){
+                    explosions.add(new Explosion(
+                            ship.getRect().x + ship.getRect().width/2,
+                            ship.getRect().y + ship.getRect().height/2,
+                            new Texture(Gdx.files.internal("exp2_0.png")),
+                            4,
+                            4
+                    ));
                     iter.remove();
                     score.addPoints();
                     enemyShips.removeValue(ship, true);
@@ -184,6 +196,13 @@ public class GameScreen implements Screen {
                 lives.loseLife();
                 iter.remove();
             }
+        }
+
+        for (Iterator<Explosion> iter = explosions.iterator(); iter.hasNext(); ) {
+            Explosion explosion = iter.next();
+            explosion.render(game.getBatch());
+
+            if (explosion.isOver()) iter.remove();
         }
     }
 }

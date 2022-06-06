@@ -12,8 +12,8 @@ import javax.sql.rowset.FilteredRowSet;
 public class Explosion {
 
 
-    private int x;
-    private int y;
+    private float x;
+    private float y;
     private Texture texture;
     private int columns;
     private int rows;
@@ -26,7 +26,7 @@ public class Explosion {
     private int height;
 
 
-    public Explosion(int x, int y, Texture texture, int columns, int rows) {
+    public Explosion(float x, float y, Texture texture, int columns, int rows) {
         this.x = x;
         this.y = y;
         this.texture = texture;
@@ -59,9 +59,9 @@ public class Explosion {
             }
             time = TimeUtils.millis();
         }
-        batch.draw(textures[currentTexture],x+ width/2,y + height/2,width,height);
+        batch.draw(textures[currentTexture],x - width/2,y - height/2,width,height);
     }
-    private boolean isOver(){
+    public boolean isOver(){
         return isOver;
     }
 }
