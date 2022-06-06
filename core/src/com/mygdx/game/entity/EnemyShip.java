@@ -17,7 +17,7 @@ public class EnemyShip extends Ship{
 
     public EnemyShip(int posX, int posY, Array<Projectile> enemyProjectiles) {
         this.texture = new Texture(Gdx.files.internal("DurrrSpaceShip.png"));
-        this.projectileTexture = new Texture(Gdx.files.internal("blasterbolt.png"));
+        this.projectileTexture = new Texture(Gdx.files.internal("enemy_blasterbolt.png"));
         this.rectangle = new Rectangle(posX,posY,6,10);
 
         timeShot = TimeUtils.millis();
@@ -38,12 +38,12 @@ public class EnemyShip extends Ship{
 
     @Override
     public void shoot() {
-        if(TimeUtils.millis() - timeShot > 2000)
+        if(TimeUtils.millis() - timeShot > 2500)
         {
             enemyProjectiles.add(new Projectile(2,
                     rectangle.x + rectangle.width/2- 1.5f,
                     rectangle.y ,
-                    -20,
+                    -25,
                     projectileTexture));
             timeShot = TimeUtils.millis();
         }
