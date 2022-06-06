@@ -20,7 +20,7 @@ public class ShipSpawner {
     }
 
     public void generate(){
-        if(TimeUtils.millis() - timeSpawn > 999)
+        if(TimeUtils.millis() - timeSpawn > 1200)
         {
             enemyShips.add(new EnemyShip(MathUtils.random(0, screenWidth - 10), screenHeight,enemyProjectiles));
             timeSpawn = TimeUtils.millis();

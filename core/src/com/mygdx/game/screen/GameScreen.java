@@ -172,7 +172,7 @@ public class GameScreen implements Screen {
             projectile.update(delta);
             projectile.render(game.getBatch());
 
-            if (projectile.getRect().y < 0) iter.remove();
+            if (projectile.getRect().y + projectile.getRect().height  < 0) iter.remove();
         }
 
         for (Iterator<EnemyShip> iter = enemyShips.iterator(); iter.hasNext(); ) {
@@ -180,7 +180,10 @@ public class GameScreen implements Screen {
             ship.update(delta);
             ship.render(game.getBatch());
 
-            if (ship.getRect().y < 0) iter.remove();
+            if (ship.getRect().y + ship.getRect().height  < 0){
+                lives.loseLife();
+                iter.remove();
+            }
         }
     }
 }
