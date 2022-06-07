@@ -34,11 +34,13 @@ public class Player extends Ship {
     public void shoot(){
         if(TimeUtils.millis() - timeShot > 300)
         {
-            playerProjectiles.add(new Projectile(2,
+            PlayerProjectile playerProjectile = new PlayerProjectile(2,
                     rectangle.x + rectangle.width/2- 1.5f,
                     rectangle.y + rectangle.height -2,
                     70,
-                    projectileTexture));
+                    projectileTexture);
+
+            EntitiesManager.RegisterEntity(playerProjectile);
             timeShot = TimeUtils.millis();
         }
     }
@@ -48,6 +50,10 @@ public class Player extends Ship {
         batch.draw(texture,rectangle.x,rectangle.y,rectangle.width,rectangle.height);
     }
 
+    @Override
+    public void checkIfDestroy() {
+
+    }
 
 
     @Override

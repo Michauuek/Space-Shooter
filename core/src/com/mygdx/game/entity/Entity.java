@@ -26,5 +26,5 @@ public abstract class Entity {
         return getRect().overlaps(obj.getRect());
     }
 
-
+    public abstract void checkIfDestroy();
 }

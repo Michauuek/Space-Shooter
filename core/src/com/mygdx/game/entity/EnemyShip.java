@@ -37,19 +37,22 @@ public class EnemyShip extends Ship{
     }
 
     @Override
+    public void checkIfDestroy() {
+
+    }
+
+    @Override
     public void shoot() {
         if(TimeUtils.millis() - timeShot > 2500)
         {
-            enemyProjectiles.add(new Projectile(2,
+            EnemyProjectile enemyProjectile = new EnemyProjectile(2,
                     rectangle.x + rectangle.width/2- 1.5f,
                     rectangle.y ,
                     -25,
-                    projectileTexture));
+                    projectileTexture);
+
+            EntitiesManager.RegisterEntity(enemyProjectile);
             timeShot = TimeUtils.millis();
         }
     }
-
-
-
-
 }
