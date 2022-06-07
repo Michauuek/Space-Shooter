@@ -3,29 +3,49 @@ package com.mygdx.game.entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EntitiesManager {
 
-    private static ArrayList<Entity> entities;
+    private static Map<String,ArrayList<Entity>> map;
 
     public EntitiesManager(){
-        entities = new ArrayList<>();
+        map = new HashMap<>();
     }
 
     public static void RegisterEntity(Entity e){
-        entities.add(e);
+        String entityName = e.getClass().getSimpleName();
+       ArrayList<Entity> array = map.get(entityName);
+       if(array == null){
+           array = new ArrayList<Entity>();
+           map.put(entityName,array);
+       }
+       array.add(e);
     }
 
     public static void UnregisterEntity(Entity e){
-        entities.remove(e);
+        // Exepction
+        String entityName = e.getClass().getSimpleName();
+        ArrayList<Entity> array = map.get(entityName);
+
+        array.remove(e);
     }
 
     public void UpdateAllEntities(float delta, SpriteBatch batch) {
-        for (int i = entities.size()-1; i >= 0; i--) {
-            Entity e = entities.get(i);
-            e.render(batch);
-            e.update(delta);
-            e.checkIfDestroy();
+
+        for(int i=map.keySet().size()-1;i >= 0; i--){
+
+           String key = map.keySet().toArray()[i].toString();
+
+           ArrayList<Entity> array = map.get(key);
+
+           for(int j=array.size()-1;j>=0;j--){
+               Entity e = array.get(j);
+               e.render(batch);
+               e.update(delta);
+               e.checkIfDestroy();
+           }
         }
     }
 }
