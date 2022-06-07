@@ -21,12 +21,14 @@ public class GameScreen implements Screen {
     final MyGdxGame game;
     private Camera camera;
     private Viewport viewport;
-    private final int WORLD_WIDTH = (int)(72*1);
-    private final int WORLD_HEIGHT = (int)(128*1);
+    public final static int WORLD_WIDTH = (int)(72*1);
+    public final static int WORLD_HEIGHT = (int)(128*1);
     private ScrollingBackground scrollingBackground;
 
     private InputHandler inputHandler;
     private Player player;
+    private EntitiesManager entitiesManager;
+    private CollisonManager collisonManager;
 
     private Score score;
     private Lives lives;
@@ -60,6 +62,8 @@ public class GameScreen implements Screen {
         inputHandler = new InputHandler(player.getPlayerMovement(), camera);
         score = new Score();
         lives = new Lives();
+        entitiesManager = new EntitiesManager();
+        collisonManager = new CollisonManager();
 
         enemyShips = new Array<>(false,10);
         spawner = new ShipSpawner(enemyShips,enemyProjectiles,WORLD_WIDTH,WORLD_HEIGHT);
@@ -93,10 +97,13 @@ public class GameScreen implements Screen {
 
         player.render(game.getBatch());
 
-        updateProjectiles(delta);
+       // updateEntities(delta); // !!!
+        entitiesManager.updateAllEntities(delta,game.getBatch());
+        collisonManager.checkAllCollison();
+
 
         //detect collisions
-        detectCollisions();
+        //detectCollisions();
 
         lives.render(game.getBatch(), delta, 1,WORLD_HEIGHT-9);
 
@@ -170,7 +177,7 @@ public class GameScreen implements Screen {
 
     }
 
-    private void updateProjectiles(float delta){
+    private void updateEntities(float delta){
         for (Iterator<Projectile> iter = playerProjectiles.iterator(); iter.hasNext(); ) {
             Projectile projectile = iter.next();
             projectile.update(delta);

@@ -22,7 +22,9 @@ public class ShipSpawner {
     public void generate(){
         if(TimeUtils.millis() - timeSpawn > 1200)
         {
-            enemyShips.add(new EnemyShip(MathUtils.random(0, screenWidth - 10), screenHeight,enemyProjectiles));
+            EnemyShip newEnemyShip = new EnemyShip(MathUtils.random(0, screenWidth - 10), screenHeight,enemyProjectiles);
+           // enemyShips.add(new EnemyShip(MathUtils.random(0, screenWidth - 10), screenHeight,enemyProjectiles));
+            EntitiesManager.RegisterEntity(newEnemyShip);
             timeSpawn = TimeUtils.millis();
         }
     }

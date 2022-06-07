@@ -6,12 +6,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Projectile extends Entity{
+public abstract class Projectile extends Entity{
 
     private float damage;
     private float speedY;
-
-
 
     public Projectile(float damage, float x, float y, float speedY, Texture texture) {
         this.damage = damage;
@@ -19,8 +17,6 @@ public class Projectile extends Entity{
         rectangle = new Rectangle(x,y,3,7);
         this.speedY = speedY;
     }
-
-
 
     @Override
     public void update(float delta) {
@@ -31,6 +27,4 @@ public class Projectile extends Entity{
     public void render(SpriteBatch batch) {
         batch.draw(texture,rectangle.x,rectangle.y,rectangle.width,rectangle.height);
     }
-
-
 }
