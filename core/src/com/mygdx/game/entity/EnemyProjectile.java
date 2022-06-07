@@ -11,7 +11,7 @@ public class EnemyProjectile extends Projectile{
     @Override
     public void checkIfDestroy() {
         if (getRect().y + getRect().height  < 0) {
-            EntitiesManager.UnregisterEntity(this);
+            EntitiesManager.unregisterEntity(this);
         }
     }
 }

@@ -28,6 +28,7 @@ public class GameScreen implements Screen {
     private InputHandler inputHandler;
     private Player player;
     private EntitiesManager entitiesManager;
+    private CollisonManager collisonManager;
 
     private Score score;
     private Lives lives;
@@ -62,6 +63,7 @@ public class GameScreen implements Screen {
         score = new Score();
         lives = new Lives();
         entitiesManager = new EntitiesManager();
+        collisonManager = new CollisonManager();
 
         enemyShips = new Array<>(false,10);
         spawner = new ShipSpawner(enemyShips,enemyProjectiles,WORLD_WIDTH,WORLD_HEIGHT);
@@ -96,7 +98,8 @@ public class GameScreen implements Screen {
         player.render(game.getBatch());
 
        // updateEntities(delta); // !!!
-        entitiesManager.UpdateAllEntities(delta,game.getBatch());
+        entitiesManager.updateAllEntities(delta,game.getBatch());
+        collisonManager.checkAllCollison();
 
 
         //detect collisions

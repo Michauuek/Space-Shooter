@@ -11,7 +11,7 @@ public class PlayerProjectile extends Projectile{
     @Override
     public void checkIfDestroy() {
         if (getRect().y > GameScreen.WORLD_HEIGHT) {
-            EntitiesManager.UnregisterEntity(this);
+            EntitiesManager.unregisterEntity(this);
         }
     }
 }

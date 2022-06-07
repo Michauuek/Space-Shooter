@@ -24,7 +24,7 @@ public class EntitiesManager {
        array.add(e);
     }
 
-    public static void UnregisterEntity(Entity e){
+    public static void unregisterEntity(Entity e){
         // Exepction
         String entityName = e.getClass().getSimpleName();
         ArrayList<Entity> array = map.get(entityName);
@@ -32,7 +32,12 @@ public class EntitiesManager {
         array.remove(e);
     }
 
-    public void UpdateAllEntities(float delta, SpriteBatch batch) {
+    public static ArrayList<Entity> getArray(String entityName){
+        ArrayList<Entity> array = map.get(entityName);
+        return array;
+    }
+
+    public void updateAllEntities(float delta, SpriteBatch batch) {
 
         for(int i=map.keySet().size()-1;i >= 0; i--){
 
