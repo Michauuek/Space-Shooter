@@ -14,7 +14,7 @@ public class EntitiesManager {
         map = new HashMap<>();
     }
 
-    public static void RegisterEntity(Entity e){
+    public static void registerEntity(Entity e){
         String entityName = e.getClass().getSimpleName();
        ArrayList<Entity> array = map.get(entityName);
        if(array == null){

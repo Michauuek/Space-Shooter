@@ -3,28 +3,21 @@ package com.mygdx.game.entity;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.game.screen.GameScreen;
 
 public class ShipSpawner {
 
     private long timeSpawn;
-    private Array<EnemyShip> enemyShips;
-    private Array<Projectile> enemyProjectiles;
-    private int screenWidth, screenHeight;
 
-    public ShipSpawner(Array<EnemyShip> enemyShips, Array<Projectile> enemyProjectiles, int screenWidth, int screenHeight) {
+    public ShipSpawner() {
         this.timeSpawn = TimeUtils.millis();
-        this.enemyShips = enemyShips;
-        this.enemyProjectiles = enemyProjectiles;
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
     }
 
     public void generate(){
         if(TimeUtils.millis() - timeSpawn > 1200)
         {
-            EnemyShip newEnemyShip = new EnemyShip(MathUtils.random(0, screenWidth - 10), screenHeight,enemyProjectiles);
-           // enemyShips.add(new EnemyShip(MathUtils.random(0, screenWidth - 10), screenHeight,enemyProjectiles));
-            EntitiesManager.RegisterEntity(newEnemyShip);
+            EnemyShip newEnemyShip = new EnemyShip(MathUtils.random(0, GameScreen.WORLD_WIDTH - 10), GameScreen.WORLD_HEIGHT);
+            EntitiesManager.registerEntity(newEnemyShip);
             timeSpawn = TimeUtils.millis();
         }
     }

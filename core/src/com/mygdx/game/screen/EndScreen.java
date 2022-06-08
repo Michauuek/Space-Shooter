@@ -43,7 +43,7 @@ public class EndScreen implements Screen{
 
         viewport = new StretchViewport(WORLD_WIDTH,WORLD_HEIGHT,camera);
 
-        background = new ScrollingBackground(WORLD_WIDTH,WORLD_HEIGHT);
+        background = new ScrollingBackground();
 
 
         label1Style = new Label.LabelStyle();

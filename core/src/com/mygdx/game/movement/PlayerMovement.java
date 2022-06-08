@@ -3,22 +3,16 @@ package com.mygdx.game.movement;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.repo.IMovable;
+import com.mygdx.game.screen.GameScreen;
 
 public class PlayerMovement implements IMovable {
 
     private float horizontalSpeed = 60;
-//    private float positionX;
-//    private int playerWidth;
-
     Rectangle playerRectangle;
-    private int screenWidth;
-    private int screenHeight;
 
-    public PlayerMovement(Rectangle playerRectangle, int screenWidth, int screenHeight){
+    public PlayerMovement(Rectangle playerRectangle){
 
         this.playerRectangle = playerRectangle;
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
     }
 
     public void moveLeft(float delta) {
@@ -50,13 +44,13 @@ public class PlayerMovement implements IMovable {
 //    }
 
     private void CheckBounds(){
-        if(playerRectangle.x > screenWidth-playerRectangle.width)
-            playerRectangle.x = screenWidth-playerRectangle.width;
+        if(playerRectangle.x > GameScreen.WORLD_WIDTH -playerRectangle.width)
+            playerRectangle.x = GameScreen.WORLD_WIDTH-playerRectangle.width;
         if(playerRectangle.x < 0)
             playerRectangle.x = 0;
 
-        if(playerRectangle.y > screenHeight-playerRectangle.height)
-            playerRectangle.y = screenHeight-playerRectangle.height;
+        if(playerRectangle.y > GameScreen.WORLD_HEIGHT-playerRectangle.height)
+            playerRectangle.y = GameScreen.WORLD_HEIGHT-playerRectangle.height;
         if(playerRectangle.y < 0)
             playerRectangle.y = 0;
     }

@@ -6,22 +6,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.mygdx.game.movement.PlayerMovement;
 
 public class EnemyShip extends Ship{
 
     private long timeShot;
-    private Array<Projectile> enemyProjectiles;
-
     private Texture projectileTexture;
+    private static Lives lives;
 
-    public EnemyShip(int posX, int posY, Array<Projectile> enemyProjectiles) {
+    public EnemyShip(int posX, int posY) {
         this.texture = new Texture(Gdx.files.internal("DurrrSpaceShip.png"));
         this.projectileTexture = new Texture(Gdx.files.internal("enemy_blasterbolt.png"));
         this.rectangle = new Rectangle(posX,posY,6,10);
 
         timeShot = TimeUtils.millis();
-        this.enemyProjectiles = enemyProjectiles;
+    }
+
+    public static void Bind(Lives lives) {
+        EnemyShip.lives = lives;
     }
 
     @Override
@@ -38,7 +39,10 @@ public class EnemyShip extends Ship{
 
     @Override
     public void checkIfDestroy() {
-
+        if (getRect().y + getRect().height  < 0){
+            lives.loseLife();
+            EntitiesManager.unregisterEntity(this);
+        }
     }
 
     @Override
@@ -51,7 +55,7 @@ public class EnemyShip extends Ship{
                     -25,
                     projectileTexture);
 
-            EntitiesManager.RegisterEntity(enemyProjectile);
+            EntitiesManager.registerEntity(enemyProjectile);
             timeShot = TimeUtils.millis();
         }
     }

@@ -1,24 +1,35 @@
 package com.mygdx.game.entity;
 
+import com.mygdx.game.repo.Collision;
+import com.mygdx.game.repo.CollisionsRegistry;
+import com.mygdx.game.repo.ICollisionEvent;
+
 import java.util.ArrayList;
 
 public class CollisonManager {
 
-    public void checkAllCollison(){
+    private CollisionsRegistry collisionsRegistry;
 
-        checkPlayerProjectilesCollison();
+    public void Bind(CollisionsRegistry collisionsRegistry){
+        this.collisionsRegistry = collisionsRegistry;
     }
 
-    private void checkPlayerProjectilesCollison(){
-        ArrayList<Entity> playerProjectiles = EntitiesManager.getArray(PlayerProjectile.class.getSimpleName());
-        ArrayList<Entity> enemyShips = EntitiesManager.getArray(EnemyShip.class.getSimpleName());
+    public void checkAllCollison(){
+        for (Collision c: collisionsRegistry.getCollisions()) {
+            checkCollisionBetween(c);
+        }
+    }
 
-        if(playerProjectiles != null && enemyShips != null) {
+    private void checkCollisionBetween(Collision collision){
 
-            for (int i = playerProjectiles.size() - 1; i >= 0; i--) {
-                for (int j = enemyShips.size() - 1; j >= 0; j--) {
-                    if (enemyShips.get(j).collides(playerProjectiles.get(i))) {
-                          EntitiesManager.unregisterEntity(enemyShips.get(j));
+        ArrayList<Entity> e1 = EntitiesManager.getArray(collision.getFirstEntity());
+        ArrayList<Entity> e2 = EntitiesManager.getArray(collision.getSecondEntity());
+
+        if(e1 != null && e2 != null) {
+            for (int i = e1.size() - 1; i >= 0; i--) {
+                for (int j = e2.size() - 1; j >= 0; j--) {
+                    if (e2.get(j).collides(e1.get(i))) {
+                        collision.getEvent().onCollisionBetween(e1.get(i),e2.get(j));
                     }
                 }
             }

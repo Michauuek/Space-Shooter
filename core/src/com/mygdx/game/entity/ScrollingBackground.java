@@ -3,6 +3,7 @@ package com.mygdx.game.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.screen.GameScreen;
 
 public class ScrollingBackground {
 
@@ -19,12 +20,9 @@ public class ScrollingBackground {
     private float[] backgroundOffsets = {0,0,0,0};
     private float maxScrollingSpeed;
 
-    private int WORLD_WIDTH,WORLD_HEIGHT;
 
-    public ScrollingBackground( int WORLD_WIDTH, int WORLD_HEIGHT) {
-        this.WORLD_WIDTH = WORLD_WIDTH;
-        this.WORLD_HEIGHT = WORLD_HEIGHT;
-        maxScrollingSpeed = WORLD_HEIGHT /4.f;
+    public ScrollingBackground() {
+        maxScrollingSpeed = GameScreen.WORLD_HEIGHT /4.f;
     }
 
     public void render(SpriteBatch batch, float delta){
@@ -32,12 +30,12 @@ public class ScrollingBackground {
 
             backgroundOffsets[layer] += delta * maxScrollingSpeed / (float)Math.pow(2.0, (double)(backgroundOffsets.length - layer-1));
 
-            if(backgroundOffsets[layer] > WORLD_HEIGHT){
-                backgroundOffsets[layer] -= WORLD_HEIGHT;
+            if(backgroundOffsets[layer] > GameScreen.WORLD_HEIGHT){
+                backgroundOffsets[layer] -= GameScreen.WORLD_HEIGHT;
             }
 
-            batch.draw(backgrounds[layer],0,-backgroundOffsets[layer],WORLD_WIDTH,WORLD_HEIGHT);
-            batch.draw(backgrounds[layer],0,-backgroundOffsets[layer] + WORLD_HEIGHT,WORLD_WIDTH,WORLD_HEIGHT);
+            batch.draw(backgrounds[layer],0,-backgroundOffsets[layer],GameScreen.WORLD_WIDTH,GameScreen.WORLD_HEIGHT);
+            batch.draw(backgrounds[layer],0,-backgroundOffsets[layer] + GameScreen.WORLD_HEIGHT,GameScreen.WORLD_WIDTH, GameScreen.WORLD_HEIGHT);
         }
     }
 }

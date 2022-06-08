@@ -12,18 +12,16 @@ public class Player extends Ship {
 
     PlayerMovement playerMovement;
     private long timeShot;
-    private Array<Projectile> playerProjectiles;
 
     private Texture projectileTexture;
 
-    public Player(int posX, int posY, int screenWidth, int screenHeight, Array<Projectile> playerProjectiles) {
+    public Player(int posX, int posY) {
         this.texture = new Texture(Gdx.files.internal("shipPlayer.png"));
         this.projectileTexture = new Texture(Gdx.files.internal("blasterbolt.png"));
         this.rectangle = new Rectangle(posX,posY,10,15);
 
-        playerMovement = new PlayerMovement(rectangle,screenWidth, screenHeight);
+        playerMovement = new PlayerMovement(rectangle);
         timeShot = TimeUtils.millis();
-        this.playerProjectiles = playerProjectiles;
     }
 
     public PlayerMovement getPlayerMovement() {
@@ -40,7 +38,7 @@ public class Player extends Ship {
                     70,
                     projectileTexture);
 
-            EntitiesManager.RegisterEntity(playerProjectile);
+            EntitiesManager.registerEntity(playerProjectile);
             timeShot = TimeUtils.millis();
         }
     }
@@ -59,6 +57,5 @@ public class Player extends Ship {
     @Override
     public void update(float delta) {
         shoot();
-        //System.out.println(TimeUtils.millis());
     }
 }

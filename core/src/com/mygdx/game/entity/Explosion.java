@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 import javax.sql.rowset.FilteredRowSet;
 
-public class Explosion {
+public class Explosion extends Entity {
 
 
     private float x;
@@ -49,6 +49,11 @@ public class Explosion {
         height = 15;
     }
 
+    @Override
+    public void update(float delta) {
+
+    }
+
     public void render(SpriteBatch batch){
         if(TimeUtils.millis() - time > 100 && isOver != true)
         {
@@ -61,7 +66,11 @@ public class Explosion {
         }
         batch.draw(textures[currentTexture],x - width/2,y - height/2,width,height);
     }
-    public boolean isOver(){
-        return isOver;
+
+    @Override
+    public void checkIfDestroy() {
+        if(isOver){
+            EntitiesManager.unregisterEntity(this);
+        }
     }
 }
