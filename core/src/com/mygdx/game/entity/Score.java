@@ -1,7 +1,9 @@
 package com.mygdx.game.entity;
 
 
-public class Score {
+import java.io.Serializable;
+
+public class Score implements Serializable {
 
     private Long points;
 

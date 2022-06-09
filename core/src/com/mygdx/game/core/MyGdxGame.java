@@ -12,7 +12,8 @@ import com.mygdx.game.screen.MenuScreen;
 public class MyGdxGame extends Game {
 
 	private SpriteBatch batch;
-	private BitmapFont font;
+	public BitmapFont font;
+	public BitmapFont font2;
 
 
 
@@ -23,7 +24,9 @@ public class MyGdxGame extends Game {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 		parameter.size = 80;
-		font = generator.generateFont(parameter); // font size 12 pixels
+		font = generator.generateFont(parameter);
+		parameter.size = 40;
+		font2 = generator.generateFont(parameter);
 
 
 

@@ -14,7 +14,10 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.core.MyGdxGame;
+import com.mygdx.game.entity.Score;
 import com.mygdx.game.entity.ScrollingBackground;
+
+import java.io.*;
 
 
 public class EndScreen implements Screen{
@@ -23,21 +26,32 @@ public class EndScreen implements Screen{
     private Camera camera;
     private Long points;
 
-
     private Viewport viewport;
     private final int WORLD_WIDTH = (int)(72*1);
     private final int WORLD_HEIGHT = (int)(128*1);
+    Long bestScore;
 
     Label.LabelStyle label1Style;
+    Label.LabelStyle label2Style;
 
     private ScrollingBackground background;
 
     Label label1;
     Label label2;
+    Label label3;
 
     public EndScreen(MyGdxGame game, Long points) {
         this.game = game;
         this.points = points;
+
+        try {
+            loadSaveBestScore(points);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
         camera = new OrthographicCamera();
 
@@ -50,18 +64,49 @@ public class EndScreen implements Screen{
         label1Style.font = game.getFont();
         label1Style.fontColor = Color.WHITE;
 
+        label2Style = new Label.LabelStyle();
+        label2Style.font = game.font2;
+        label2Style.fontColor = Color.WHITE;
+
         label1 = new Label("Game Over",label1Style);
         label1.setFontScale(0.20f);
         label1.setSize(WORLD_WIDTH,30);
         label1.setPosition(0,60);
         label1.setAlignment(Align.center);
 
-        label2 = new Label("" + points,label1Style);
-        label2.setFontScale(0.12f);
+        label2 = new Label("Current Score : " + points,label2Style);
+        label2.setFontScale(0.20f);
         label2.setSize(WORLD_WIDTH,18);
         label2.setPosition(0,50);
         label2.setAlignment(Align.center);
 
+        label3 = new Label("Best Score : " + bestScore,label2Style);
+        label3.setFontScale(0.20f);
+        label3.setSize(WORLD_WIDTH,18);
+        label3.setPosition(0,40);
+        label3.setAlignment(Align.center);
+
+
+    }
+    public void loadSaveBestScore(Long points) throws IOException, ClassNotFoundException {
+
+        bestScore = 0L;
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("score.bin"))) {
+            bestScore = (Long) inputStream.readObject();
+            System.out.println("Best Score read from file:"+bestScore);
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Couldnt find best score file!");
+        }
+
+        System.out.println("Best Score in this game:" + points);
+
+        if( bestScore < points) {
+            try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("score.bin"))) {
+                outputStream.writeObject(points);
+            }
+            bestScore = points;
+        }
 
     }
 
@@ -95,12 +140,14 @@ public class EndScreen implements Screen{
         game.getBatch().begin();
 
         background.render(game.getBatch(), delta);
+        //game.getFont().getData().setScale(1.f);
 
         game.getFont().setColor(1,1,1, 1);
-        game.getFont().getData().setScale(1.f);
+
 
         label1.draw(game.getBatch(), 1.f);
         label2.draw(game.getBatch(), 1.f);
+        label3.draw(game.getBatch(), 1.f);
 
 
 

@@ -6,8 +6,6 @@ import com.mygdx.game.repo.ICollisionEvent;
 import jdk.javadoc.internal.doclets.toolkit.util.Utils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ListIterator;
 
 public class CollisonManager {
 
