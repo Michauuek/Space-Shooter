@@ -12,6 +12,10 @@ public class Score implements Serializable {
         this.points = 0L;
     }
 
+    public Score(Long points) {
+        this.points = points;
+    }
+
     public void addPoints(){
         points += 100L;
     }

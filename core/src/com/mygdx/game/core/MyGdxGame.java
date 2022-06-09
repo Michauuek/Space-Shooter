@@ -39,8 +39,11 @@ public class MyGdxGame extends Game {
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose(){
 		super.dispose();
+		batch.dispose();
+		font.dispose();
+		font2.dispose();
 	}
 
 	@Override

@@ -53,7 +53,6 @@ public class Player extends Ship {
 
     }
 
-
     @Override
     public void update(float delta) {
         shoot();

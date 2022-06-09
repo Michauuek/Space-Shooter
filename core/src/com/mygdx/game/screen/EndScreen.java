@@ -24,12 +24,15 @@ public class EndScreen implements Screen{
 
     final MyGdxGame game;
     private Camera camera;
-    private Long points;
+    //private Long points;
 
     private Viewport viewport;
     private final int WORLD_WIDTH = (int)(72*1);
     private final int WORLD_HEIGHT = (int)(128*1);
-    Long bestScore;
+    //Long bestScore;
+
+    Score bestScore;
+    Score score;
 
     Label.LabelStyle label1Style;
     Label.LabelStyle label2Style;
@@ -42,10 +45,11 @@ public class EndScreen implements Screen{
 
     public EndScreen(MyGdxGame game, Long points) {
         this.game = game;
-        this.points = points;
+        this.score = new Score(points);
+
 
         try {
-            loadSaveBestScore(points);
+            loadSaveBestScore(score);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -74,13 +78,13 @@ public class EndScreen implements Screen{
         label1.setPosition(0,60);
         label1.setAlignment(Align.center);
 
-        label2 = new Label("Current Score : " + points,label2Style);
+        label2 = new Label("Current Score : " + score.getPoints(),label2Style);
         label2.setFontScale(0.20f);
         label2.setSize(WORLD_WIDTH,18);
         label2.setPosition(0,50);
         label2.setAlignment(Align.center);
 
-        label3 = new Label("Best Score : " + bestScore,label2Style);
+        label3 = new Label("Best Score : " + bestScore.getPoints(),label2Style);
         label3.setFontScale(0.20f);
         label3.setSize(WORLD_WIDTH,18);
         label3.setPosition(0,40);
@@ -88,24 +92,24 @@ public class EndScreen implements Screen{
 
 
     }
-    public void loadSaveBestScore(Long points) throws IOException, ClassNotFoundException {
+    public void loadSaveBestScore(Score score) throws IOException, ClassNotFoundException {
 
-        bestScore = 0L;
+        bestScore = new Score();
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("score.bin"))) {
-            bestScore = (Long) inputStream.readObject();
-            System.out.println("Best Score read from file:"+bestScore);
+            bestScore = (Score) inputStream.readObject();
+            System.out.println("Best Score read from file:"+bestScore.getPoints());
         }
         catch (FileNotFoundException e){
             System.out.println("Couldnt find best score file!");
         }
 
-        System.out.println("Best Score in this game:" + points);
+        System.out.println("Best Score in this game:" + score.getPoints());
 
-        if( bestScore < points) {
+        if( bestScore.getPoints() < score.getPoints()) {
             try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("score.bin"))) {
-                outputStream.writeObject(points);
+                outputStream.writeObject(score);
             }
-            bestScore = points;
+            bestScore = score;
         }
 
     }
@@ -199,6 +203,5 @@ public class EndScreen implements Screen{
 
     @Override
     public void dispose() {
-
     }
 }
