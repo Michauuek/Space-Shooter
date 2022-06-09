@@ -44,22 +44,31 @@ public class GameScreen implements Screen {
 
         this.game = game;
 
-        camera = new OrthographicCamera();
+        InitializeMembers();
+        BindMembers();
 
+        EntitiesManager.registerEntity(player);
+    }
+
+    private void InitializeMembers(){
+        camera = new OrthographicCamera();
         viewport = new StretchViewport(WORLD_WIDTH,WORLD_HEIGHT,camera);
         scrollingBackground = new ScrollingBackground();
         player = new Player(WORLD_WIDTH/2,3);
-        inputHandler = new InputHandler(player.getPlayerMovement(), camera);
+        inputHandler = new InputHandler(player.getPlayerMovement(),camera);
         score = new Score();
         lives = new Lives();
         entitiesManager = new EntitiesManager();
         collisonManager = new CollisonManager();
         collisionsRegistry = new CollisionsRegistry();
         spawner = new ShipSpawner();
+    }
 
-        BindMembers();
-
-        EntitiesManager.registerEntity(player);
+    private void BindMembers(){
+        collisonManager.Bind(collisionsRegistry);
+        collisionsRegistry.Bind(score);
+        collisionsRegistry.Bind(lives);
+        EnemyShip.Bind(lives);
     }
 
 
@@ -115,12 +124,5 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
 
-    }
-
-    private void BindMembers(){
-        collisonManager.Bind(collisionsRegistry);
-        collisionsRegistry.Bind(score);
-        collisionsRegistry.Bind(lives);
-        EnemyShip.Bind(lives);
     }
 }
