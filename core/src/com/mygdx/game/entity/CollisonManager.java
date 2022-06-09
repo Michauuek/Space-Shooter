@@ -3,10 +3,24 @@ package com.mygdx.game.entity;
 import com.mygdx.game.repo.Collision;
 import com.mygdx.game.repo.CollisionsRegistry;
 import com.mygdx.game.repo.ICollisionEvent;
+import jdk.javadoc.internal.doclets.toolkit.util.Utils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
 
 public class CollisonManager {
+
+    class Pair<T, V>
+    {
+        public Pair(T first, V second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        public T first;
+        public V second;
+    }
 
     private CollisionsRegistry collisionsRegistry;
 
@@ -25,14 +39,23 @@ public class CollisonManager {
         ArrayList<Entity> e1 = EntitiesManager.getArray(collision.getFirstEntity());
         ArrayList<Entity> e2 = EntitiesManager.getArray(collision.getSecondEntity());
 
+        ArrayList<Pair<Entity,Entity>> valuesToRemove = new ArrayList<>();
+
         if(e1 != null && e2 != null) {
             for (int i = e1.size() - 1; i >= 0; i--) {
                 for (int j = e2.size() - 1; j >= 0; j--) {
                     if (e2.get(j).collides(e1.get(i))) {
-                        collision.getEvent().onCollisionBetween(e1.get(i),e2.get(j));
+                        //collision.getEvent().onCollisionBetween(e1.get(i),e2.get(j));
+                        valuesToRemove.add(new Pair<>(e1.get(i),e2.get(j)));
+
                     }
                 }
             }
+
+            for(Pair<Entity,Entity> pair : valuesToRemove){
+                collision.getEvent().onCollisionBetween(pair.first, pair.second);
+            }
+
         }
     }
 }
