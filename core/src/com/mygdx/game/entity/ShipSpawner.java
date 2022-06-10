@@ -13,6 +13,9 @@ public class ShipSpawner {
         this.timeSpawn = TimeUtils.millis();
     }
 
+    /**
+     * Spawns new Enemy ship in a certain amount of time
+     */
     public void generate(){
         if(TimeUtils.millis() - timeSpawn > 1200)
         {

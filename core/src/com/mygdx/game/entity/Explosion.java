@@ -9,6 +9,9 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 import javax.sql.rowset.FilteredRowSet;
 
+/**
+ * Implementation of explosions
+ */
 public class Explosion extends Entity {
 
 
@@ -25,7 +28,14 @@ public class Explosion extends Entity {
     private int width;
     private int height;
 
-
+    /**
+     *
+     * @param x  position x
+     * @param y position y
+     * @param texture texture of explosion
+     * @param columns  number of colums
+     * @param rows  number of rows
+     */
     public Explosion(float x, float y, Texture texture, int columns, int rows) {
         this.x = x;
         this.y = y;

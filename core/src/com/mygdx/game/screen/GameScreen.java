@@ -112,6 +112,9 @@ public class GameScreen implements Screen {
         game.getBatch().end();
     }
 
+    /**
+     * Initializes score label
+     */
     private void initializeScoreLabel(){
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = game.font2;
