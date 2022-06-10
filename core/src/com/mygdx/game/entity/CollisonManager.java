@@ -26,12 +26,19 @@ public class CollisonManager {
         this.collisionsRegistry = collisionsRegistry;
     }
 
+    /**
+     * Check all collision types from collisonRegistry
+     */
     public void checkAllCollison(){
         for (Collision c: collisionsRegistry.getCollisions()) {
             checkCollisionBetween(c);
         }
     }
 
+    /**
+     * Check if given collison type occurs
+     * @param collision
+     */
     private void checkCollisionBetween(Collision collision){
 
         ArrayList<Entity> e1 = EntitiesManager.getArray(collision.getFirstEntity());
@@ -43,17 +50,13 @@ public class CollisonManager {
             for (int i = e1.size() - 1; i >= 0; i--) {
                 for (int j = e2.size() - 1; j >= 0; j--) {
                     if (e2.get(j).collides(e1.get(i))) {
-                        //collision.getEvent().onCollisionBetween(e1.get(i),e2.get(j));
                         valuesToRemove.add(new Pair<>(e1.get(i),e2.get(j)));
-
                     }
                 }
             }
-
             for(Pair<Entity,Entity> pair : valuesToRemove){
                 collision.getEvent().onCollisionBetween(pair.first, pair.second);
             }
-
         }
     }
 }
