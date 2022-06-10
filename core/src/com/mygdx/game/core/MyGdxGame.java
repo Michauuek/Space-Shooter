@@ -28,13 +28,6 @@ public class MyGdxGame extends Game {
 		parameter.size = 40;
 		font2 = generator.generateFont(parameter);
 
-
-
-		//font = new BitmapFont();
-
-		/*gameScreen = new GameScreen();
-		setScreen(gameScreen);*/
-
 		this.setScreen(new MenuScreen(this));
 	}
 
@@ -49,7 +42,6 @@ public class MyGdxGame extends Game {
 	@Override
 	public void render() {
 		super.render();
-		//gameScreen.render(Gdx.graphics.getDeltaTime());
 	}
 
 	@Override

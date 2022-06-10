@@ -137,14 +137,9 @@ public class EndScreen implements Screen{
         camera.update();
 
         game.getBatch().setProjectionMatrix(camera.combined);
-//        viewport.apply();
-       //game.getBatch().setProjectionMatrix(viewport.getCamera().combined);
-
-        //game.getBatch().setProjectionMatrix(camera.combined);
         game.getBatch().begin();
 
         background.render(game.getBatch(), delta);
-        //game.getFont().getData().setScale(1.f);
 
         game.getFont().setColor(1,1,1, 1);
 
@@ -153,24 +148,6 @@ public class EndScreen implements Screen{
         label2.draw(game.getBatch(), 1.f);
         label3.draw(game.getBatch(), 1.f);
 
-
-
-//        game.getFont().draw(game.getBatch(),
-//                "GAME OVER ",
-//                WORLD_WIDTH/4,
-//                WORLD_HEIGHT/2,
-//                WORLD_WIDTH,
-//                1,
-//                false);
-//        game.getFont().getData().setScale(0.3f);
-//        game.getFont().draw(game.getBatch(),
-//                "Tap anywhere to play again!",
-//                5,
-//                WORLD_HEIGHT/4,
-//                WORLD_WIDTH,
-//                1,
-//                false);
-        //game.getFont().draw(game.getBatch(), "Tap anywhere to play again!", 0, 100);
         game.getBatch().end();
 
         if (Gdx.input.isTouched()) {

@@ -25,33 +25,22 @@ public class InputHandler {
         vector.x = 0;
         vector.y = 0;
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            //movement.moveLeft(delta);
             vector.x += -1;
-            //movement.move(-1.f,0.f, delta);
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            //movement.moveRight(delta);
             vector.x += 1;
-            //movement.move(1.f,0.f, delta);
         if(Gdx.input.isKeyPressed(Input.Keys.UP))
-            //movement.moveLeft(delta);
             vector.y += 1;
-            //movement.move(0.f,1.f, delta);
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN))
-            //movement.moveRight(delta);
             vector.y += -1;
-            //movement.move(0.f,-1.f, delta);
 
         if(Gdx.input.isTouched()) {
             Vector3 touchPos = new Vector3();
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 
-
             camera.unproject(touchPos);
-            //movement.setPosition(touchPos.x, touchPos.y);
             vector.x = touchPos.x;
             vector.y = touchPos.y;
             movement.moveTo(vector, delta);
-            //bucket.x = touchPos.x - 64 / 2;
         }
         else {
             movement.move(vector, delta);
