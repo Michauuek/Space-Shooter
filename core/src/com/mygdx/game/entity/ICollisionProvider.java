@@ -4,6 +4,6 @@ import com.mygdx.game.repo.Collision;
 
 import java.util.ArrayList;
 
-public interface ICollsionProvider {
+public interface ICollisionProvider {
     ArrayList<Collision> getCollisions();
 }

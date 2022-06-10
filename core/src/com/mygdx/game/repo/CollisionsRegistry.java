@@ -6,7 +6,7 @@ import com.mygdx.game.entity.*;
 
 import java.util.ArrayList;
 
-public class CollisionsRegistry implements ICollsionProvider {
+public class CollisionsRegistry implements ICollisionProvider {
 
     private ArrayList<Collision> collisions;
 

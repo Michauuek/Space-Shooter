@@ -17,9 +17,9 @@ public class CollisonManager {
         public V second;
     }
 
-    private ICollsionProvider collisionProvider;
+    private ICollisionProvider collisionProvider;
 
-    public void Bind(ICollsionProvider collisionProvider){
+    public void Bind(ICollisionProvider collisionProvider){
         this.collisionProvider = collisionProvider;
     }
 
