@@ -1,9 +1,6 @@
 package com.mygdx.game.entity;
 
 import com.mygdx.game.repo.Collision;
-import com.mygdx.game.repo.CollisionsRegistry;
-import com.mygdx.game.repo.ICollisionEvent;
-import jdk.javadoc.internal.doclets.toolkit.util.Utils;
 
 import java.util.ArrayList;
 
@@ -20,17 +17,17 @@ public class CollisonManager {
         public V second;
     }
 
-    private CollisionsRegistry collisionsRegistry;
+    private ICollsionProvider collisionProvider;
 
-    public void Bind(CollisionsRegistry collisionsRegistry){
-        this.collisionsRegistry = collisionsRegistry;
+    public void Bind(ICollsionProvider collisionProvider){
+        this.collisionProvider = collisionProvider;
     }
 
     /**
      * Check all collision types from collisonRegistry
      */
     public void checkAllCollison(){
-        for (Collision c: collisionsRegistry.getCollisions()) {
+        for (Collision c: collisionProvider.getCollisions()) {
             checkCollisionBetween(c);
         }
     }
