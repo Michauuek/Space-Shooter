@@ -1,4 +1,4 @@
-package com.mygdx.game.entity;
+package com.mygdx.game.repo;
 
 import com.mygdx.game.repo.Collision;
 
