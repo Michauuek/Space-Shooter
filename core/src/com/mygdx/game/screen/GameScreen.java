@@ -3,8 +3,11 @@ package com.mygdx.game.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -15,6 +18,7 @@ import com.mygdx.game.movement.Collisions;
 import com.mygdx.game.movement.InputHandler;
 import com.mygdx.game.repo.CollisionsRegistry;
 
+import java.awt.*;
 import java.util.Iterator;
 
 public class GameScreen implements Screen {
@@ -34,6 +38,8 @@ public class GameScreen implements Screen {
 
     private Score score;
     private Lives lives;
+    private Label scoreLabel;
+
 
     //private DelayedRemovalArray<EnemyShip> removalEnemyShip = new DelayedRemovalArray<>(enemyProjectiles);
     ShipSpawner spawner;
@@ -62,6 +68,8 @@ public class GameScreen implements Screen {
         collisonManager = new CollisonManager();
         collisionsRegistry = new CollisionsRegistry();
         spawner = new ShipSpawner();
+
+        initializeScoreLabel();
     }
 
     private void BindMembers(){
@@ -86,6 +94,7 @@ public class GameScreen implements Screen {
 
         game.getBatch().begin();
 
+
         spawner.generate();
         inputHandler.ListenForInput(delta);
         scrollingBackground.render(game.getBatch(),delta);
@@ -93,11 +102,25 @@ public class GameScreen implements Screen {
         collisonManager.checkAllCollison();
         lives.render(game.getBatch(), delta, 1,WORLD_HEIGHT-9);
 
+        scoreLabel.setText(""+score.getPoints());
+        scoreLabel.draw(game.getBatch(),1);
+
         if(lives.isOver()){
             game.setScreen(new EndScreen(game, score.getPoints()));
         }
 
         game.getBatch().end();
+    }
+
+    private void initializeScoreLabel(){
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = game.font2;
+        labelStyle.fontColor = Color.WHITE;
+        scoreLabel = new Label(""+score.getPoints(), labelStyle);
+        scoreLabel.setFontScale(0.175f);
+        scoreLabel.setSize(WORLD_WIDTH-1,13);
+        scoreLabel.setPosition(0,WORLD_HEIGHT-scoreLabel.getHeight());
+        scoreLabel.setAlignment(Align.right);
     }
 
     @Override
