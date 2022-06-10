@@ -4,7 +4,6 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.entity.EnemyShip;
 import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.Projectile;
-import com.sun.tools.javac.util.Pair;
 
 import java.util.Iterator;
 
@@ -18,12 +17,12 @@ public class Collisions {
         this.group2 = group2;
     }
 
-    public Array<Pair<Entity, Entity>> scanForCollisions() {
-        Array<Pair<Entity, Entity>> out = new Array<Pair<Entity, Entity>>();
+    public Array<MyPair<Entity, Entity>> scanForCollisions() {
+        Array<MyPair<Entity, Entity>> out = new Array<MyPair<Entity, Entity>>();
         for (Entity obj1 : group1) {
             for (Entity obj2 : group2) {
                 if (obj1.getRect().overlaps(obj2.getRect())) {
-                    Pair<Entity, Entity> pair = new Pair<Entity, Entity>(obj1, obj2);
+                    MyPair<Entity, Entity> pair = new MyPair<>(obj1, obj2);
                     if (!out.contains(pair, true))
                         out.add(pair);
                 }
