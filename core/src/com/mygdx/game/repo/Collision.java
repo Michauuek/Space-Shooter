@@ -1,5 +1,8 @@
 package com.mygdx.game.repo;
 
+/**
+ * Contain information about collision that occur between two classes.
+ */
 public class Collision {
     private String firstEntity;
     private String secondEntity;
