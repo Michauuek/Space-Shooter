@@ -3,6 +3,9 @@ package com.mygdx.game.entity;
 
 import java.io.Serializable;
 
+/**
+ * Class to store and manage score of current game
+ */
 public class Score implements Serializable {
 
     private Long points;

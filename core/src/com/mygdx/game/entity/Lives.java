@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * Class to manage player's lives
+ */
 public class Lives {
     private int count;
     private Texture texture;
@@ -22,6 +25,10 @@ public class Lives {
         }
     }
 
+    /**
+     * Function check if own a lives
+     * @return true if game isOver
+     */
     public Boolean isOver(){
         if(count == 0)
             return true;
